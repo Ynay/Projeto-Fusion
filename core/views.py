@@ -1,10 +1,15 @@
 from django.views.generic import FormView
 from django.urls import reverse_lazy
-from django.contrib import messages
+from django.contrib import messages, HttpResponse
+
 
 from .models import Servico, Funcionario, feature
 from .forms import ContatoForm
 
+def index(request):
+    r = request.get('http://httpbin.org/status/418')
+    print(r.text)
+    return HttpResponse('<pre>' + r.text + '</pre>')
 
 class IndexView(FormView):
     template_name = 'index.html'
